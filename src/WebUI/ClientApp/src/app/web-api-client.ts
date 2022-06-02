@@ -1154,7 +1154,7 @@ export class RentItemTypesClient implements IRentItemTypesClient {
 export interface IRentOrdersClient {
     getRentOrder(id: string): Observable<RentOrderDto>;
     update(id: string, command: UpdateRentOrderCommand): Observable<FileResponse>;
-    delete(id: number): Observable<FileResponse>;
+    delete(id: string): Observable<FileResponse>;
     getCustomers(pageNumber: number | undefined, pageSize: number | undefined): Observable<PaginatedListOfRentOrderListDto>;
     create(command: CreateRentOrderCommand): Observable<string>;
 }
@@ -1276,7 +1276,7 @@ export class RentOrdersClient implements IRentOrdersClient {
         return _observableOf<FileResponse>(null as any);
     }
 
-    delete(id: number): Observable<FileResponse> {
+    delete(id: string): Observable<FileResponse> {
         let url_ = this.baseUrl + "/api/RentOrders/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
@@ -1438,7 +1438,7 @@ export class RentOrdersClient implements IRentOrdersClient {
 export class CustomerDto implements ICustomerDto {
     id?: number;
     name?: string | undefined;
-    phineNumber?: string | undefined;
+    phoneNumber?: string | undefined;
 
     constructor(data?: ICustomerDto) {
         if (data) {
@@ -1453,7 +1453,7 @@ export class CustomerDto implements ICustomerDto {
         if (_data) {
             this.id = _data["id"];
             this.name = _data["name"];
-            this.phineNumber = _data["phineNumber"];
+            this.phoneNumber = _data["phoneNumber"];
         }
     }
 
@@ -1468,7 +1468,7 @@ export class CustomerDto implements ICustomerDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
-        data["phineNumber"] = this.phineNumber;
+        data["phoneNumber"] = this.phoneNumber;
         return data;
     }
 }
@@ -1476,7 +1476,7 @@ export class CustomerDto implements ICustomerDto {
 export interface ICustomerDto {
     id?: number;
     name?: string | undefined;
-    phineNumber?: string | undefined;
+    phoneNumber?: string | undefined;
 }
 
 export class PaginatedListOfCustomerListDto implements IPaginatedListOfCustomerListDto {
@@ -2569,7 +2569,7 @@ export class CreateRentOrderCommand implements ICreateRentOrderCommand {
     rentDate?: Date;
     returnDate?: Date;
     rentAmount?: number;
-    inspectionData?: any | undefined;
+    inspectionData?: string;
 
     constructor(data?: ICreateRentOrderCommand) {
         if (data) {
@@ -2616,7 +2616,7 @@ export interface ICreateRentOrderCommand {
     rentDate?: Date;
     returnDate?: Date;
     rentAmount?: number;
-    inspectionData?: any | undefined;
+    inspectionData?: string;
 }
 
 export class UpdateRentOrderCommand implements IUpdateRentOrderCommand {
@@ -2626,7 +2626,7 @@ export class UpdateRentOrderCommand implements IUpdateRentOrderCommand {
     rentDate?: Date;
     returnDate?: Date;
     rentAmount?: number;
-    inspectionData?: any | undefined;
+    inspectionData?: string;
 
     constructor(data?: IUpdateRentOrderCommand) {
         if (data) {
@@ -2676,7 +2676,7 @@ export interface IUpdateRentOrderCommand {
     rentDate?: Date;
     returnDate?: Date;
     rentAmount?: number;
-    inspectionData?: any | undefined;
+    inspectionData?: string;
 }
 
 export interface FileResponse {

@@ -799,8 +799,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "guid"
             },
             "x-position": 1
           }
@@ -906,7 +906,7 @@
             "type": "string",
             "nullable": true
           },
-          "phineNumber": {
+          "phoneNumber": {
             "type": "string",
             "nullable": true
           }
@@ -1401,7 +1401,7 @@
             "format": "decimal"
           },
           "inspectionData": {
-            "nullable": true
+            "type": "string"
           }
         }
       },
@@ -1434,7 +1434,7 @@
             "format": "decimal"
           },
           "inspectionData": {
-            "nullable": true
+            "type": "string"
           }
         }
       }

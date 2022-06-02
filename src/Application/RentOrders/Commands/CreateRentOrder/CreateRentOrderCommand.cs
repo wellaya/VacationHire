@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VacationHire.Application.Common.Interfaces;
 using VacationHire.Domain.Entities;
@@ -11,7 +12,7 @@ public record CreateRentOrderCommand : IRequest<Guid>
     public DateTime RentDate { get; set; }
     public DateTime ReturnDate { get; set; }
     public decimal RentAmount { get; set; }
-    public JObject? InspectionData { get; set; }
+    public string InspectionData { get; set; }
 }
 
 public class CreateRentOrderCommandHandler : IRequestHandler<CreateRentOrderCommand, Guid>
@@ -32,7 +33,7 @@ public class CreateRentOrderCommandHandler : IRequestHandler<CreateRentOrderComm
             RentDate = request.RentDate,
             ReturnDate = request.ReturnDate,
             RentAmount = request.RentAmount,
-            InspectionData = request.InspectionData
+            InspectionData = JsonConvert.DeserializeObject<JObject>(string.IsNullOrEmpty(request.InspectionData) ? "{}" : request.InspectionData) 
         };
 
         _context.RentOrders.Add(entity);

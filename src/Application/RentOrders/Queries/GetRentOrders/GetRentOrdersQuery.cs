@@ -25,8 +25,8 @@ public class GetRentOrdersQueryHandler : IRequestHandler<GetRentOrdersQuery, Pag
 
     public async Task<PaginatedList<RentOrderListDto>> Handle(GetRentOrdersQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Customers
-            .OrderBy(x => x.Name)
+        return await _context.RentOrders
+            .OrderBy(x => x.RentDate)
             .ProjectTo<RentOrderListDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }

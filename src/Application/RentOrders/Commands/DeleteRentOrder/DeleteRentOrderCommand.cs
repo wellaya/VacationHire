@@ -4,7 +4,7 @@ using VacationHire.Application.Common.Interfaces;
 using VacationHire.Domain.Entities;
 
 namespace VacationHire.Application.RentOrders.Commands.DeleteRentOrder;
-public record DeleteRentOrderCommand(int Id) : IRequest;
+public record DeleteRentOrderCommand(Guid Id) : IRequest;
 
 public class DeleteRentOrderCommandHandler : IRequestHandler<DeleteRentOrderCommand>
 {

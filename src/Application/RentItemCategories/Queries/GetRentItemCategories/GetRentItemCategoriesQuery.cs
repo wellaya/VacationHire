@@ -25,7 +25,7 @@ public class GetRentItemCategoryQueryHandler : IRequestHandler<GetRentItemCatego
 
     public async Task<PaginatedList<RentItemCategoryListDto>> Handle(GetRentItemCategoriesQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Customers
+        return await _context.RentItemCategories
             .OrderBy(x => x.Name)
             .ProjectTo<RentItemCategoryListDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);

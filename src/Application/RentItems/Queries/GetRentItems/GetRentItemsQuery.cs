@@ -25,7 +25,7 @@ public class GetRentItemsQueryHandler : IRequestHandler<GetRentItemsQuery, Pagin
 
     public async Task<PaginatedList<RentItemListDto>> Handle(GetRentItemsQuery request, CancellationToken cancellationToken)
     {
-        return await _context.Customers
+        return await _context.RentItems
             .OrderBy(x => x.Name)
             .ProjectTo<RentItemListDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);

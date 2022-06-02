@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using VacationHire.Application.Common.Exceptions;
 using VacationHire.Application.Common.Interfaces;
@@ -13,7 +14,7 @@ public record UpdateRentOrderCommand : IRequest
     public DateTime RentDate { get; set; }
     public DateTime ReturnDate { get; set; }
     public decimal RentAmount { get; set; }
-    public JObject? InspectionData { get; set; }
+    public string InspectionData { get; set; }
 }
 
 public class UpdateRentOrderCommandHandler : IRequestHandler<UpdateRentOrderCommand>
@@ -40,7 +41,7 @@ public class UpdateRentOrderCommandHandler : IRequestHandler<UpdateRentOrderComm
         entity.RentDate = request.RentDate;
         entity.ReturnDate = request.ReturnDate;
         entity.RentAmount = request.RentAmount;
-        entity.InspectionData = request.InspectionData;
+        entity.InspectionData = JsonConvert.DeserializeObject<JObject>(string.IsNullOrEmpty(request.InspectionData) ? "{}" : request.InspectionData);
 
         await _context.SaveChangesAsync(cancellationToken);
 

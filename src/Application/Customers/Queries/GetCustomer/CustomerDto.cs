@@ -8,5 +8,5 @@ public class CustomerDto : IMapFrom<Customer>
 
     public string? Name { get; set; }
 
-    public string? PhineNumber { get; set; }
+    public string? PhoneNumber { get; set; }
 }
